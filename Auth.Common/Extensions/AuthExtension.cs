@@ -1,6 +1,7 @@
 ﻿using Auth.Common.Configurations;
 using Auth.Common.Context;
 using Auth.Common.Models;
+using Auth.Common.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@ namespace Auth.Common.Extensions
                     IssuerSigningKey = authConf.GetSymmetricSecurityKey(),
                 };
             });
+
+            services.AddTransient<ITokenGetterService, JwtTokenGetterService>();
 
             return services;
         }
