@@ -21,7 +21,9 @@ namespace Auth.Common.Services
 
         public string GetToken(string userId, DateTime @from, IEnumerable<string> roles, IDictionary<string, string> additionalClaims = null)
         {
-            throw new NotImplementedException();
+            var userIdentity = GetIdentity(userId, roles, additionalClaims);
+
+            return GetJwtToken(from, userIdentity.Claims);
         }
 
         private ClaimsIdentity GetIdentity(string userId, IEnumerable<string> roles, IDictionary<string, string> additionalClaims)
